@@ -91,7 +91,9 @@ public class ListDemo
         // 09.15.23
 
 
-        /*an enhanced for lop AUTOMATICALLY creates an iterator (that's why we don't need to make one) */
+        /*an enhanced for lop AUTOMATICALLY creates an iterator (that's why we don't need to make one) 
+         * but this also creates a concurrent modification exception
+        */
         for(String n: staff)
             if(n.equals("henry moodie"))
             {
