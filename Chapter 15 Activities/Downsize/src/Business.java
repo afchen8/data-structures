@@ -22,6 +22,7 @@ public class Business
         {
             num++;
             iterator.next();
+            
             if (num == n)
             {
                 num = 0;
