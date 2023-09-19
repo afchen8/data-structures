@@ -16,20 +16,15 @@ public class ListUtil
         int listsize = strings.size();
        
         ListIterator<String> iterator1 = strings.listIterator();
-        ListIterator<String> iterator2 = strings.listIterator();
+        ListIterator<String> iterator2 = strings.listIterator(strings.size()); // sends the iterator to the back
 
-        for (int j = 0; j < listsize; j++)
-        {
-            iterator2.next();       
-        }
-
+        // two iterators on opposite ends of list
         for (int i = 0; i<(listsize/2); i++)
         {
             String item = iterator1.next();  
             String item2 = iterator2.previous();
             iterator1.set(item2);
             iterator2.set(item);
-            System.out.println("hit");
         }
     }
 }
