@@ -28,3 +28,5 @@ public class ListUtil
         }
     }
 }
+
+// there's only a concurrent modification exception when you use iterators!!! could've just done addfirst(removelast) or smth like that LMAO
