@@ -36,23 +36,55 @@ public class SudokuSolver {
         }
 
         // create the list of sets for each row (this.rows)
-        // ...
+        // each row will be its own set
+        // AN ARRAY LIST LIST OF NINE SETS OF INTEGERS
+        for (int j = 0; j < grid.length; j++)
+        {
+            Set<Integer> numset = new HashSet<Integer>();
+            this.rows.add(numset);
+
+            for (int i = 0; i < 9; i++)
+            {
+                numset.add(grid[j][i]);
+            }
+        }
 
         // create the list of sets for each col (this.cols)
         // ...
+        for (int j = 0; j < grid.length; j++)
+        {
+            Set<Integer> numset = new HashSet<Integer>();
+            this.cols.add(numset);
+
+            for (int i = 0; i < 9; i++)
+            {
+                numset.add(grid[i][j]);
+            }
+        }
 
         // create the list of sets for each square (this.squares)
+        // go through each row and column to make a set of all the squares
         /* the squares are added to the list row-by-row:
             0 1 2
             3 4 5
             6 7 8
          */
-        // ...
+        for (int a = 0; a < 3; a++)
+        {
+            Set<Integer> numset = new HashSet<Integer>();
+            this.squares.add(numset);
+            for (int b = 0; b < 3; b++)
+            {
+                numset.add(grid[a*3][b*3]); // THIS IS WRONG
+            }
+        }
+        
 
         // create a hash set for [1..9] (this.nums)
-        // ...
+        // set of the numbers 1-9
 
         // visually inspect that all the sets are correct
+        // print out the puzzel
         for (int row = 0; row < N; row++) {
             System.out.println("row " + row + ": " + this.rows.get(row));
         }
@@ -89,7 +121,7 @@ public class SudokuSolver {
         /*
             Create a new set based on the this.nums and remove all elements in the sets
             corresponding to nextRow, nextCol, and the corresponding square (use the
-            removeAll method).
+            removeAll method) --- calculating where that square is uses size of the sudoku puzzle (n variable)
 
             Properly indexing the squares list of sets is tricky. Verify that your
             algorithm is correct.
@@ -141,7 +173,7 @@ public class SudokuSolver {
     }
 
     public static void main(String[] args) {
-        String fileName = "src/puzzle1.txt";
+        String fileName = "Chapter 15 Activities/Sudoku/src/puzzle1.txt";
 
         SudokuSolver solver = new SudokuSolver(fileName);
         System.out.println(solver);
