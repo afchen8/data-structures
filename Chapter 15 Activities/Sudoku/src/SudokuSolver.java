@@ -41,27 +41,34 @@ public class SudokuSolver {
         for (int j = 0; j < grid.length; j++)
         {
             Set<Integer> numset = new HashSet<Integer>();
-            this.rows.add(numset);
+            this.rows = new ArrayList<Set<Integer>>();
 
             for (int i = 0; i < 9; i++)
             {
                 numset.add(grid[j][i]);
             }
+
+            this.rows.add(numset);
         }
+        System.out.println("Rows: " + this.rows);
 
         // create the list of sets for each col (this.cols)
         // ...
         for (int j = 0; j < grid.length; j++)
         {
             Set<Integer> numset = new HashSet<Integer>();
-            this.cols.add(numset);
+            this.cols = new ArrayList<Set<Integer>>();
 
             for (int i = 0; i < 9; i++)
             {
                 numset.add(grid[i][j]);
             }
-        }
 
+            this.cols.add(numset);
+        }
+        System.out.println("Columns: " + this.cols);
+
+        
         // create the list of sets for each square (this.squares)
         // go through each row and column to make a set of all the squares
         /* the squares are added to the list row-by-row:
@@ -69,16 +76,25 @@ public class SudokuSolver {
             3 4 5
             6 7 8
          */
-        for (int a = 0; a < 3; a++)
+        for (int a = 0; a < 9; a+=3) // does this 9 times
         {
-            Set<Integer> numset = new HashSet<Integer>();
-            this.squares.add(numset);
-            for (int b = 0; b < 3; b++)
+            int rows, cols;
+            for (int b = 0; b < 9; b+=3)
             {
-                numset.add(grid[a*3][b*3]); // THIS IS WRONG
+                Set<Integer> numset = new HashSet<Integer>();
+                this.squares = new ArrayList<Set<Integer>>();
+                for (rows = a; rows < a+3; rows++)
+                {
+                    for (cols = a; cols < a+3; cols++)
+                    {
+                        numset.add(grid[rows][cols]);
+                    }
+                }
+                this.squares.add(numset);
+                System.out.println("Square: " + numset);
             }
         }
-        
+    
 
         // create a hash set for [1..9] (this.nums)
         // set of the numbers 1-9
@@ -86,7 +102,7 @@ public class SudokuSolver {
         // visually inspect that all the sets are correct
         // print out the puzzel
         for (int row = 0; row < N; row++) {
-            System.out.println("row " + row + ": " + this.rows.get(row));
+            //System.out.println("row " + row + ": " + this.rows.get(row));
         }
         for (int col = 0; col < N; col++) {
             System.out.println("col " + col + ": " + this.cols.get(col));
@@ -117,6 +133,7 @@ public class SudokuSolver {
             return true;
         }
 
+        /* 
         // get all possible numbers for the row and column we are trying to populate
         /*
             Create a new set based on the this.nums and remove all elements in the sets
