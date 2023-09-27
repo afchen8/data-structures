@@ -41,7 +41,7 @@ public class SudokuSolver {
         this.rows = new ArrayList<Set<Integer>>();
         for (int j = 0; j < grid.length; j++)
         {
-            Set<Integer> numset = new HashSet<Integer>();
+            Set<Integer> numset = new HashSet<>();
             for (int i = 0; i < 9; i++)
             {
                 numset.add(grid[j][i]);
@@ -56,7 +56,7 @@ public class SudokuSolver {
         this.cols = new ArrayList<Set<Integer>>();
         for (int j = 0; j < grid.length; j++)
         {
-            Set<Integer> numset = new HashSet<Integer>();
+            Set<Integer> numset = new HashSet<>();
             for (int i = 0; i < 9; i++)
             {
                 numset.add(grid[i][j]);
@@ -77,13 +77,12 @@ public class SudokuSolver {
         this.squares = new ArrayList<Set<Integer>>();
         for (int a = 0; a < 9; a+=3) // does this 9 times
         {
-            int rows, cols;
             for (int b = 0; b < 9; b+=3)
             {
-                Set<Integer> numset = new HashSet<Integer>();
-                for (rows = a; rows < a+3; rows++)
+                Set<Integer> numset = new HashSet<>();
+                for (int rows = a; rows < a+3; rows++)
                 {
-                    for (cols = b; cols < b+3; cols++)
+                    for (int cols = b; cols < b+3; cols++)
                     {
                         numset.add(grid[rows][cols]);
                     }
@@ -157,7 +156,18 @@ public class SudokuSolver {
         possibleNums.removeAll(this.rows.get(nextRow));
         possibleNums.removeAll(this.cols.get(nextCol));
 
-        // calculate which square the blank spot is in
+        // calculate the starting index of the square the blank spot is in
+        // takes nextRow (row index), divides by 3 to bracket, then multiplies by 3 to get starting index (either 0, 3, or 6)
+        int rowNumber = nextRow / 3 * 3;
+        int colNumber = nextCol / 3 * 3;
+        // goes through that square starting at index to remove
+        for (int i = rowNumber; i < rowNumber += 3; i++)
+        {
+            for (int j = colNumber; j < colNumber += 3; j++)
+            {
+                possibleNums.remove(this.grid[i][j]);
+            }
+        }
         
         
         // ...
