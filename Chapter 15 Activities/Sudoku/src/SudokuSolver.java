@@ -160,6 +160,7 @@ public class SudokuSolver {
         // takes nextRow (row index), divides by 3 to bracket, then multiplies by 3 to get starting index (either 0, 3, or 6)
         int rowNumber = nextRow / 3 * 3;
         int colNumber = nextCol / 3 * 3;
+        
         // goes through that square starting at index to remove
         for (int i = rowNumber; i < rowNumber += 3; i++)
         {
@@ -177,11 +178,20 @@ public class SudokuSolver {
             return false;
         }
 
-        // try each possible number
+        // trying each possible number in possibleNums
         for (Integer possibleNum : possibleNums) {
-            // update the grid and all three corresponding sets with possibleNum
-            // ...
+            // update the grid
+            this.grid[nextRow][nextCol] = possibleNum;
 
+            // update the sets with that number too
+            this.rows.get(nextRow).add(possibleNum);
+            this.cols.get(nextRow).add(possibleNum);
+
+            // calculating the square index - where it is in this.squares
+            // and adding that to the set in this.squares
+            int squareIndex = (nextRow / 3) * 3 + (nextCol / 3);
+            this.squares.get(squareIndex).add(possibleNum);
+            
             // recursively solve the board
             if (this.solve()) {
                 // the board is solved!
@@ -192,7 +202,10 @@ public class SudokuSolver {
                  element in the grid back to 0 and removing possibleNum from all three corresponding
                  sets.
                  */
-                // ...
+                this.grid[nextRow][nextCol] = 0;
+                this.rows.get(nextRow).remove(possibleNum);
+                this.cols.get(nextCol).remove(possibleNum);
+                this.squares.get(squareIndex).remove(possibleNum);
             }
         }
 
