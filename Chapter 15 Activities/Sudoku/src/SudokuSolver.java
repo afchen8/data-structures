@@ -157,8 +157,8 @@ public class SudokuSolver {
 
         // calculate the starting index of the square the blank spot is in
         // takes nextRow (row index), divides by 3 to bracket, then multiplies by 3 to get starting index (either 0, 3, or 6)
-        int rowNumber = nextRow / 3 * 3;
-        int colNumber = nextCol / 3 * 3;
+        // int rowNumber = nextRow / 3 * 3;
+        // int colNumber = nextCol / 3 * 3;
         
         /*
         // goes through that square starting at index to remove
@@ -171,45 +171,55 @@ public class SudokuSolver {
         }
         */
         
-                 //method for calculating the index of the square
-                 int square = -1;
-                 if (nextRow < 3){
-                     switch (nextCol / 3){
-                         case 0:
-                             square = 0;
-                             break;
-                         case 1:
-                             square = 1;
-                             break;
-                         case 2:
-                             square = 2;
-                             break;
-                     }
-                 } else if (nextRow < 6){
-                     switch (nextCol / 3){
-                         case 0:
-                             square = 3;
-                             break;
-                         case 1:
-                             square = 4;
-                             break;
-                         case 2:
-                             square = 5;
-                             break;
-                     }
-                 } else {
-                     switch (nextCol / 3){
-                         case 0:
-                             square = 6;
-                             break;
-                         case 1:
-                             square = 7;
-                             break;
-                         case 2:
-                             square = 8;
-                             break;
-                     }
-                 }
+        //method for calculating the index of the square
+        int squareNumber = -1;
+        if (nextRow < 3)
+        {
+            switch (nextCol / 3)
+            {
+                case 0:
+                    squareNumber = 0;
+                    break;
+                case 1:
+                    squareNumber = 1;
+                    break;
+                case 2:
+                    squareNumber = 2;
+                    break;
+            }
+        } 
+        else if (nextRow < 6)
+        {
+            switch (nextCol / 3)
+            {
+                case 0:
+                    squareNumber = 3;
+                    break;
+                case 1:
+                    squareNumber = 4;
+                    break;
+                case 2:
+                    squareNumber = 5;
+                    break;
+            }
+        } 
+        else 
+        {
+            switch (nextCol / 3)
+            {
+                case 0:
+                    squareNumber = 6;
+                    break;
+                case 1:
+                    squareNumber = 7;
+                    break;
+                case 2:
+                    squareNumber = 8;
+                    break;
+            }
+        }
+
+        possibleNums.removeAll(this.squares.get(squareNumber));
                  
 
         // if there are no possible numbers, we cannot solve the board in its current state
@@ -228,8 +238,8 @@ public class SudokuSolver {
 
             // calculating the square index - where it is in this.squares
             // and adding that to the set in this.squares
-            //int squareIndex = (nextRow / 3) * 3 + (nextCol / 3) * 3;
-            this.squares.get(square).add(possibleNum);
+            // int squareIndex = (nextRow / 3) * 3 + (nextCol / 3) * 3;
+            this.squares.get(squareNumber).add(possibleNum);
             
             // recursively solve the board
             if (this.solve()) {
@@ -244,7 +254,7 @@ public class SudokuSolver {
                 this.grid[nextRow][nextCol] = 0;
                 this.rows.get(nextRow).remove(possibleNum);
                 this.cols.get(nextCol).remove(possibleNum);
-                this.squares.get(square).remove(possibleNum);
+                this.squares.get(squareNumber).remove(possibleNum);
             }
         }
 
