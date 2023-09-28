@@ -29,5 +29,16 @@ public class MapDemo
         favColors.put("Athena", Color.ORANGE);
 
         System.out.println(favColors.get("Athena"));
+
+        // create a set of the keys in a map
+        // this is why you can't have two values attributed to one key, cus no duplicates!
+        Set<String> keys = favColors.keySet();
+        for (String key : keys)
+        {
+            System.out.println(key + "("+key.hashCode()+"): " + favColors.get(key));
+            // will print out each key, its hashCode, and its value
+        }
+
+
     }
 }
