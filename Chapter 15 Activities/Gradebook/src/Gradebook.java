@@ -53,8 +53,8 @@ public class Gradebook
                 Set<String> keys = grades.keySet();
                 for (String key : keys)
                 {
-                    System.out.println(key + grades.get(key));
-                    // will print out each key, its hashCode, and its value
+                    System.out.println(key + ": " + grades.get(key));
+                    // will print out each key and its value
                 }
             } else
             {
