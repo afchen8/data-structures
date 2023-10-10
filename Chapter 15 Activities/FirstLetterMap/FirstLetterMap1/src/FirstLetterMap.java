@@ -25,15 +25,22 @@ public class FirstLetterMap
                 String word = clean(in.next());
                 Character c = word.charAt(0);
 
-                // Update the map here
-                // Use the Java 8 merge method
-                . . .
+                words.merge(c, new TreeSet<>(Arrays.AsList(word)), (oldValue, newValue) ->
+                            {
+                                oldValue.add(word);
+                                return oldValue;
+                            }
+                            );
 
             }
 
             // Print the map here in this form
             // a: [a, able, aardvark]
-            . . .
+            for (Character c : words.keySet()) // each character in the key set
+                {
+                    System.out.println(c + ": " + words.get(c)); // all values associated with the key
+                }
+            
         } catch (FileNotFoundException e)
         {
             System.out.println("Cannot open: " + filename);
