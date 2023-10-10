@@ -17,24 +17,32 @@ public class FirstLetterMap
         try (Scanner in = new Scanner(new File(filename)))
         {
 
-            // Create your map here
-            ...
+            Map<Character, String> wordCharacters = new HashMap<>();
 
             while (in.hasNext())
             {
                 String word = clean(in.next());
                 Character c = word.charAt(0);
 
-                // Update the map here
-                // Modify Worked Example 15.1
-                . . .
+                if (wordCharacters.get(c)) == null) // nothing there
+                {
+                    wordCharacters.put(c, word);
+                }
+                else // if there already is
+                {    
+                    wordLengths.put(c, word.Characters.get(c) + ", " + word);
+                }
 
 
             }
 
             // Print the map here in this form
             // a: [a, able, aardvark]
-            . . .
+            for (Character c : wordCharacters.keySet())
+                {
+                    System.out.println(c + ": " + wordCharacters.get(c));
+                }
+            
         } catch (FileNotFoundException e)
         {
             System.out.println("Cannot open: " + filename);
