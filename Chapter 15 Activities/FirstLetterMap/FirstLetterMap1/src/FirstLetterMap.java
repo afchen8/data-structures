@@ -17,15 +17,14 @@ public class FirstLetterMap
         try (Scanner in = new Scanner(new File(filename)))
         {
 
-            // Create your map here
-            ...
+            Map<Character, String> wordCharacter = new HashMap<>();
 
             while (in.hasNext())
             {
                 String word = clean(in.next());
                 Character c = word.charAt(0);
 
-                words.merge(c, new TreeSet<>(Arrays.AsList(word)), (oldValue, newValue) ->
+                wordCharacter.merge(c, new TreeSet<>(Arrays.AsList(word)), (oldValue, newValue) ->
                             {
                                 oldValue.add(word);
                                 return oldValue;
@@ -36,9 +35,9 @@ public class FirstLetterMap
 
             // Print the map here in this form
             // a: [a, able, aardvark]
-            for (Character c : words.keySet()) // each character in the key set
+            for (Character c : wordCharacter.keySet()) // each character in the key set
                 {
-                    System.out.println(c + ": " + words.get(c)); // all values associated with the key
+                    System.out.println(c + ": " + wordCharacter.get(c)); // all values associated with the key
                 }
             
         } catch (FileNotFoundException e)
