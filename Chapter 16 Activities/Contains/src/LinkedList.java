@@ -41,7 +41,17 @@ public class LinkedList
     */
     public boolean contains(Object obj)
     {
-        // ...
+        if (first == null)
+            throw new NoSuchElementException();
+        
+        Object next = removeFirst();
+        while (!next.equals(obj))
+        {
+            next = removeFirst();    
+        }
+        if (next.equals(obj))
+            return true;
+        return false;
     }
 
     /**
