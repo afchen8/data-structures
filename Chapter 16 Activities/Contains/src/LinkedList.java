@@ -42,15 +42,17 @@ public class LinkedList
     public boolean contains(Object obj)
     {
         if (first == null)
-            throw new NoSuchElementException();
+            return false;
         
-        Object next = removeFirst();
-        while (!next.equals(obj))
+        Node current = first;
+
+        while (current != null)
         {
-            next = removeFirst();    
-        }
-        if (next.equals(obj))
+           if (obj.equals(current.data))
             return true;
+            current = current.next;
+        }
+        // never gets through
         return false;
     }
 

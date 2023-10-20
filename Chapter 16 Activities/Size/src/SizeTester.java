@@ -28,9 +28,8 @@ public class SizeTester
             System.out.print(iterator.next() + " ");
         System.out.println();
         System.out.println("Expected: Juliet Emily");
-        System.out.println(names.size());
+        
         System.out.println("Expected: 2");
-
         System.out.println("Size: " + names.size());
     }
 }
