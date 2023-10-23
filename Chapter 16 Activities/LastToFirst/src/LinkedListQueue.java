@@ -22,11 +22,27 @@ public class LinkedListQueue
     */
     public void lastToFirst()
     {
-        . . .
+        Object element = tail.data;
+        Node newNode = new Node();
+        
+        // assigning newNode to the head data + next
+        newNode.data = head.data;
+        newNode.next = head.next;
 
+        // assigning head to the element from the tail
+        head.data = element;
 
+        // assigning the next element of head to be the og head (with data stored in newNode)
+        head.next = newNode;
 
+        // assigning tail to be the head ??
+        tail = head;
 
+        System.out.println("next is " + newNode.data);
+
+        System.out.println("head is " + head.data);
+
+        System.out.println("tail is: " + tail.data);
 
     }
 
