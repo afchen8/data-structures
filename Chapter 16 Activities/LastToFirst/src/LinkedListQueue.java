@@ -22,6 +22,7 @@ public class LinkedListQueue
     */
     public void lastToFirst()
     {
+        /*
         Object element = tail.data;
         Node newNode = new Node();
         
@@ -43,6 +44,23 @@ public class LinkedListQueue
         System.out.println("head is " + head.data);
 
         System.out.println("tail is: " + tail.data);
+        */
+
+        if (tail != head)
+        {
+            Node check = head.next;
+            tail.next = head;
+            head = tail;
+            while (check != null)
+            {
+                if (check.next == head)
+                {
+                    check.next = null;
+                    tail = check;
+                }
+                check = check.next;
+            }
+        }
 
     }
 
