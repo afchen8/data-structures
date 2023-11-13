@@ -10,7 +10,7 @@ public class BinaryTree
     */
     public BinaryTree()
     {
-         
+        this.root = null;    
     } 
 
     /**
@@ -19,7 +19,11 @@ public class BinaryTree
     */
     public BinaryTree(Object rootData) 
     {
-        
+        this.root = new Node();
+        this.root.data = rootData;
+        this.root.left = null;
+        this.root.right = null;
+        // because no parameter input
     }
 
     /**
@@ -30,12 +34,19 @@ public class BinaryTree
     */
     public BinaryTree(Object rootData, BinaryTree left, BinaryTree right)
     {
-        
+        this(rootData); //calling constructor alr written inputing just rootData
+        this.root.left = left.root; // left is a tree
+        // we want the node not the tree
+        this.root.right = right.root;
     }
     
     static class Node
     {
-        
+        public Object data;
+        public Node left;
+        public Node right;
+        // these could be null
+        // only have two nodes extending - don't need a whole children ArrayList
     }
 
     /**
@@ -45,7 +56,17 @@ public class BinaryTree
     */
     private static int height(Node n)
     {
-        return 0;
+        if (n == null)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1 + Math.max(BinaryTree.height(n.left), BinaryTree.height(n.right));
+            // if both sides aren't the same
+            // 1+ is bc of the root
+
+        }
     }
 
     /**
@@ -54,7 +75,8 @@ public class BinaryTree
     */
     public int height()
     {
-        return 0;
+        return BinaryTree.height(this.root); 
+        // non static version you could call
     }
 
     /**
@@ -63,7 +85,7 @@ public class BinaryTree
     */
     public boolean isEmpty()
     {
-         return false;
+        return this.root == null;
     }
 
     /**
@@ -72,7 +94,7 @@ public class BinaryTree
     */
     public Object data()
     {
-         return null;
+         return root.data;
     }
     
     /**
@@ -81,7 +103,11 @@ public class BinaryTree
     */
     public BinaryTree left() 
     { 
-        return null;
+        BinaryTree subtree = new BinaryTree();
+        subtree.root = this.root.left; 
+        // setting this subtree equal to the left node from the root
+        // which is the left subtree
+        return subtree;
     }
 
     /**
@@ -90,6 +116,8 @@ public class BinaryTree
     */
     public BinaryTree right() 
     { 
-        return null;
+        BinaryTree subtree = new BinaryTree();
+        subtree.root = this.root.right;
+        return subtree;
     }
 }

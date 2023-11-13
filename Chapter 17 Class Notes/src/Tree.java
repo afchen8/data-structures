@@ -16,11 +16,19 @@ public class Tree
             Computes the size of the subtree whose root is this node.
             @return the number of nodes in the subtree
         */
+        // SPECIFIC TO THIS NODE
         public int size()
         {
-            return 0;
+            int sum = 1; // there's one node right now - the root
+            for (Node child: this.children)
+            {
+                sum += child.size();
+            }
+            return sum;
         }
     }
+
+    private Node root;
 
     /**
         Constructs a tree with one node and no children.
@@ -28,7 +36,10 @@ public class Tree
     */
     public Tree(Object rootData)
     {
-        
+        this.root = new Node();
+        this.root.data = rootData; // the object parameter
+        this.root.children = new ArrayList<>(); 
+        // array list should be fine for most cases
     }
 
     /**
@@ -36,7 +47,9 @@ public class Tree
     */
     public void addSubtree(Tree subtree)
     {
-        
+        this.root.children.add(subtree.root);
+        // everything in the subtree.root is going to be added
+        // as the last element of the children ArrayList
     }
 
     /**
@@ -45,7 +58,9 @@ public class Tree
     */
     public int size() 
     {
-        return 0;
+        return (this.root.size());
+        // there's alr a size method within node
+        // if you do with the root node, returns size of entire tree
     }
 
     // Additional methods will be added in later sections.
