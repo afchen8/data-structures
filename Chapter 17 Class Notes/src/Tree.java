@@ -9,7 +9,8 @@ public class Tree
     
     static class Node
     {
-        
+        public Object data;
+        public List<Node> children;
 
         /**
             Computes the size of the subtree whose root is this node.
