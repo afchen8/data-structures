@@ -126,9 +126,9 @@ public class BinarySearchTree
         // so, find the least element of the right stree
 
         Node leastParent = toBeRemoved;
-        Nd least = toBeRemoved.right;
+        Node least = toBeRemoved.right;
 
-        while (least.leaf != null)
+        while (least.left != null)
         {
             leastParent = least;
             least = least.left;
@@ -151,7 +151,8 @@ public class BinarySearchTree
     */
     public void print()
     {   
-    
+        print(this.root);
+        System.out.println();
     }   
 
     /**
@@ -160,7 +161,17 @@ public class BinarySearchTree
     */
     private static void print(Node parent)
     {   
-        
+        if (parent == null)
+            return; // doesn't print anything
+
+        // first printing the left subtree
+        print(parent.left);
+
+        // print the parent itself
+        System.out.println(parent.data+"");
+
+        // next printing the right subtree
+        print(parent.right);
     }
 
     /**
