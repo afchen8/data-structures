@@ -85,9 +85,50 @@ public class MorseCode
      */
     private static void treeInsert(char letter, String code)
     {
-        /*
-            !!! INSERT CODE HERE
-        */
+        // inserting nodes into decodeTree
+
+        // first, need to go through String code BEFORE the end
+        int num = 0;
+
+        while (num < code.length() - 1)
+        {
+            if (code.charAt(num) == '.')
+            {
+                // go left
+                // if the left is null
+                if (decodeTree.getLeft() == null)
+                {
+                    decodeTree.setLeft(new TreeNode(""));
+                }
+                // can't set everything to null because some might be paths for other symbols
+                decodeTree = decodeTree.getLeft();
+            }
+            else if (code.charAt(num) == '_')
+            {
+                // go right
+                // if the right is null
+                if (decodeTree.getRight() == null)
+                {
+                    decodeTree.setRight(new Treenode(""))
+                }
+                decodeTree = decodeTree.getRight();
+                }
+            }
+            num++;
+        }
+        // reached last one
+        if (code.charAt(num) == '.')
+        {
+            if (decodeTree.getLeft() == null)
+            {
+                decodeTree.setLeft(new Treenode(letter));
+            }
+            decodeTree.getLeft.setValue(letter);
+        }
+        else if (code.charAt(num) == '_')
+        {
+            decodeTree.setRight(new Treenode(letter));
+        }
     }
 
     /**
