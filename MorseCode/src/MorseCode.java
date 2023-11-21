@@ -89,6 +89,7 @@ public class MorseCode
 
         // first, need to go through String code BEFORE the end
         int num = 0;
+        Treenode nod = decodeTree;
 
         while (num < code.length() - 1)
         {
@@ -96,22 +97,22 @@ public class MorseCode
             {
                 // go left
                 // if the left is null
-                if (decodeTree.getLeft() == null)
+                if (nod.getLeft() == null)
                 {
-                    decodeTree.setLeft(new TreeNode(""));
+                    nod.setLeft(new TreeNode(""));
                 }
                 // can't set everything to null because some might be paths for other symbols
-                decodeTree = decodeTree.getLeft();
+                nod = nod.getLeft();
             }
             else if (code.charAt(num) == '_')
             {
                 // go right
                 // if the right is null
-                if (decodeTree.getRight() == null)
+                if (nod.getRight() == null)
                 {
-                    decodeTree.setRight(new Treenode(""))
+                    nod.setRight(new Treenode(""))
                 }
-                decodeTree = decodeTree.getRight();
+                nod = nod.getRight();
                 }
             }
             num++;
@@ -119,15 +120,15 @@ public class MorseCode
         // reached last one
         if (code.charAt(num) == '.')
         {
-            if (decodeTree.getLeft() == null)
+            if (nod.getLeft() == null)
             {
-                decodeTree.setLeft(new Treenode(letter));
+                nod.setLeft(new Treenode(letter));
             }
-            decodeTree.getLeft.setValue(letter);
+            nod.getLeft.setValue(letter);
         }
         else if (code.charAt(num) == '_')
         {
-            decodeTree.setRight(new Treenode(letter));
+            nod.setRight(new Treenode(letter));
         }
     }
 
