@@ -24,7 +24,7 @@ public class FirstLetterMap
             {
                 String word = clean(in.next());
                 Character c = word.charAt(0);
-
+            
                 // Update the map here
                 // Use the Java 8 merge method
                 . . .

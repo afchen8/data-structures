@@ -5,7 +5,7 @@ import java.util.ArrayList;
     Modify the Tree class from Section 16.1 (below) to add
     a method that counts the number of leaves in the tree.
 */
-public class Tree
+public class Tree1
 {
     private Node root;
 
@@ -29,7 +29,7 @@ public class Tree
     /**
         Constructs an empty tree.
     */
-    public Tree()
+    public Tree1()
     {
         root = null;
     }
@@ -38,7 +38,7 @@ public class Tree
         Constructs a tree with one node and no children.
         @param rootData the data for the root
     */
-    public Tree(Object rootData)
+    public Tree1(Object rootData)
     {
         root = new Node();
         root.data = rootData;
@@ -48,7 +48,7 @@ public class Tree
     /**
         Adds a subtree as the last child of the root.
     */
-    public void addSubtree(Tree subtree)
+    public void addSubtree(Tree1 subtree)
     {
         root.children.add(subtree.root);
     }
@@ -63,5 +63,27 @@ public class Tree
         else { return root.size(); }
     }
 
-    // Additional methods will be added in later sections.
+    public int countLeaves()
+    {
+        return countLeavesHelper(root);
+    }
+
+    public static int countLeavesHelper(Node node)
+    {
+        int count = 0;
+        if (node.children.size() == 0)
+        {
+            count++;
+        }
+        else
+        {
+            for (Node child : node.children)
+            {
+                count += countLeavesHelper(child);
+            }
+        }
+        return count;
+    }
+
+    
 }

@@ -71,9 +71,9 @@ public class MorseCode
      */
     private static void addSymbol(char letter, String code)
     {
-        /*
-            !!! INSERT CODE HERE
-        */
+        codeMap.put(letter, code);
+        // calls treeinsert
+        treeInsert(letter, code);
     }
 
     /**
@@ -85,9 +85,51 @@ public class MorseCode
      */
     private static void treeInsert(char letter, String code)
     {
-        /*
-            !!! INSERT CODE HERE
-        */
+        // inserting nodes into decodeTree
+
+        // first, need to go through String code BEFORE the end
+        int num = 0;
+        Treenode nod = decodeTree;
+
+        while (num < code.length() - 1)
+        {
+            if (code.charAt(num) == '.')
+            {
+                // go left
+                // if the left is null
+                if (nod.getLeft() == null)
+                {
+                    nod.setLeft(new TreeNode(""));
+                }
+                // can't set everything to null because some might be paths for other symbols
+                nod = nod.getLeft();
+            }
+            else if (code.charAt(num) == '_')
+            {
+                // go right
+                // if the right is null
+                if (nod.getRight() == null)
+                {
+                    nod.setRight(new Treenode(""))
+                }
+                nod = nod.getRight();
+                }
+            }
+            num++;
+        }
+        // reached last one
+        if (code.charAt(num) == '.')
+        {
+            if (nod.getLeft() == null)
+            {
+                nod.setLeft(new Treenode(letter));
+            }
+            nod.getLeft.setValue(letter);
+        }
+        else if (code.charAt(num) == '_')
+        {
+            nod.setRight(new Treenode(letter));
+        }
     }
 
     /**

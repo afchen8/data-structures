@@ -1,3 +1,5 @@
+// was this already provided? has everything needed
+
 public class Pair
 {
     private final int row;
