@@ -11,11 +11,9 @@ public class MorseCode
     private static TreeMap<Character, String> codeMap;
     private static TreeNode decodeTree;
 
-    public static void main(String[] args)
-    {
-        MorseCode.start();  
-        System.out.println(MorseCode.encode("Hi my name is Athena slay"));
-        System.out.println(MorseCode.decode(".... ..   -- -.--   -. .- -- .   .. ...   .- - .... . -. .-   ... .-.. .- -.--"));
+     public static void main(String[] args) {
+        MorseCode.start();
+        System.out.println(MorseCode.encode("Watson come here"));
         BTreePrinter.printNode(decodeTree);
     }
 
@@ -148,51 +146,39 @@ public class MorseCode
         StringBuffer text = new StringBuffer(100);
         TreeNode nod = decodeTree;
         boolean var = true;
-        boolean space = true;
+        boolean space = false;
         int i = 0;
         
         while (i < morse.length())
         {
-            nod = decodeTree; // redefine
-            System.out.println("The value of i is: " + i);
-            var = true;
+            nod = decodeTree;
+            var = true; // resetting booleans
+            space = false;
             
-            while (var == true && i < morse.length())
-            {
+            while (var == true)
+            {             
                 if (morse.charAt(i) == ' ')
                 {    
-                    i++;
+                    if (space)
+                        text.append(nod.getValue()); // adds whole word when space is reached
+                        
                     var = false;
-                    if (morse.charAt(i+1) == ' ' && morse.charAt(i+2) == ' ')
-                    {
-                        // this is actual space between words
-                        // because each actual space takes up three spaces
-                        System.out.println("Yes space");
-                        i++;
-                        //text.append(" ");
-                    }
-                    System.out.println("Space value: " + i);
+                    
+                    if (i < morse.length() - 2 && morse.charAt(i+1) == ' ' && morse.charAt(i+2) == ' ')
+                        text.append(" "); // only adds space character if three consecutive morse spaces
                 }
-                else if (morse.charAt(i) == DOT)
+                else  if (morse.charAt(i) == DOT)
                 {
                     nod = nod.getLeft();
-                    i++;
-                    System.out.println("Dot value: " + i);
+                    space = true;
                 }
                 else if (morse.charAt(i) == DASH)
                 {
                     nod = nod.getRight();
-                    i++;
-                    System.out.println("Dash value: " + i);
+                    space = true;
                 }
+                i++;
             }
-            
-            System.out.println("this is node: " + nod.getValue());
-            
-            if (nod.getValue() != " " && nod.getValue() != null)
-                text.append(nod.getValue());
-                
-            System.out.println("Text: " + text);
         }
 
         return text.toString();
